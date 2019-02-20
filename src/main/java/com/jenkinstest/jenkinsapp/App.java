@@ -11,5 +11,6 @@ public class App
     {
     	CalculMoyen calculMoyen = new CalculMoyen();
         System.out.println( "La moyenne est : "+calculMoyen.calcul(15.5, 13));
+        System.out.println("You made it !!!!!!!!");
     }
 }
