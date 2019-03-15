@@ -7,7 +7,7 @@ node{
     withMaven(jdk: 'jdk', maven: 'maven', tempBinDir: '') {
  
       // Run the maven build
-      bat "mvn clean install package"}
+      bat "mvn clean package"}
       }
    stage('SonarQube analysis code Quality') {
     // requires SonarQube Scanner 2.8+
