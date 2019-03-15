@@ -1,0 +1,22 @@
+node{
+   stage('SCM Checkout'){
+     git 'https://github.com/BelgacemGhrab/jenkinstest.git'
+   }
+   stage('Compile-Package'){
+    
+    withMaven(jdk: 'jdk', maven: 'maven', tempBinDir: '') {
+ 
+      // Run the maven build
+      bat "mvn clean install package"}
+      }
+   stage('SonarQube analysis code Quality') {
+    // requires SonarQube Scanner 2.8+
+    def scannerHome = tool 'sonar';
+    withSonarQubeEnv('Sonar') {
+      bat "${scannerHome}/bin/sonar-runner.bat -e -Dsonar.projectName=qualite-code -Dsonar.projectVersion=2.4 -Dsonar.projectKey=amine -Dsonar.sources=src/main/java -Dsonar.language=java"
+    }
+  }
+   stage('notification'){
+      mail bcc: '', body: 'la nouvelle job via le script du Jenkins Pipeline effectes avec succés', cc: '', from: '', replyTo: '', subject: 'build avec succés', to: 'mohamed.amine.rekik@gmail.com'
+   }
+   }
